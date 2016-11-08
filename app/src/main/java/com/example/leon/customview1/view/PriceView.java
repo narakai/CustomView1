@@ -60,12 +60,11 @@ public class PriceView extends View {
                         mBackground = a.getColor(attr, Color.RED);
                         break;
                     case R.styleable.PriceView_mCornerSize:
-                        mCornerSize = a.getInteger(attr,0);
+                        mCornerSize = a.getInteger(attr, 0);
                         break;
                 }
             }
-        }
-        finally {
+        } finally {
             a.recycle();
         }
 
@@ -84,28 +83,19 @@ public class PriceView extends View {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         int width;
-        int height ;
-        if (widthMode == MeasureSpec.EXACTLY)
-        {
+        int height;
+        if (widthMode == MeasureSpec.EXACTLY) {
             width = widthSize;
-        } else
-        {
-            mPaint.setTextSize(mTitleTextSize);
-            mPaint.getTextBounds(mTitleText, 0, mTitleText.length(), mBound);
-
+        } else {
             int desired = getPaddingLeft() + mBound.width() + getPaddingRight();
-            width = desired<=widthSize?desired:widthSize;
+            width = desired <= widthSize ? desired : widthSize;
         }
 
-        if (heightMode == MeasureSpec.EXACTLY)
-        {
+        if (heightMode == MeasureSpec.EXACTLY) {
             height = heightSize;
-        } else
-        {
-            mPaint.setTextSize(mTitleTextSize);
-            mPaint.getTextBounds(mTitleText, 0, mTitleText.length(), mBound);
+        } else {
             int desired = getPaddingTop() + mBound.height() + getPaddingBottom();
-            height = desired<=heightSize?desired:heightSize;
+            height = desired <= heightSize ? desired : heightSize;
         }
         rec.set(0, 0, width, height);
         setMeasuredDimension(width, height);
@@ -120,6 +110,6 @@ public class PriceView extends View {
         mPaint.setColor(mTitleTextColor);
         Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
         int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
-        canvas.drawText(mTitleText,getPaddingLeft(), baseline, mPaint);
+        canvas.drawText(mTitleText, getPaddingLeft(), baseline, mPaint);
     }
 }
