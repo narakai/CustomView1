@@ -13,6 +13,7 @@
     <!--根据content计算view大小：MeasureSpec.AT_MOST，padding为0时rect和文本宽高一致-->
 
     <com.example.leon.customview1.view.CustomTitleView
+        android:id="@+id/c1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -20,5 +21,19 @@
         app:titleText="3712"
         app:titleTextColor2="#ff0000"
         app:titleTextSize="40sp" />
+
+    <com.example.leon.customview1.view.PriceView
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/c1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:mTitleText="我是中国人"
+        app:mTitleTextColor= "@color/colorPrimaryDark"
+        app:mTitleTextSize="18sp"
+        app:mBackground="#ff00ff"
+        app:mCornerSize= "12"
+        />
+
 
 </RelativeLayout>
