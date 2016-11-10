@@ -27,12 +27,16 @@
         android:layout_below="@id/c1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        app:mTitleText="我是中国人"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:mTitleText="1000"
         app:mTitleTextColor= "@color/colorPrimaryDark"
         app:mTitleTextSize="18sp"
         app:mBackground="#ff00ff"
         app:mCornerSize= "12"
+        app:mUp="false"
         />
 
 

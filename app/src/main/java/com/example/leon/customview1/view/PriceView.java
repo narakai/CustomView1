@@ -2,6 +2,8 @@ package com.example.leon.customview1.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -21,6 +23,39 @@ public class PriceView extends View {
     private String mTitleText;
     private int mTitleTextColor;
     private int mTitleTextSize;
+    private boolean mUp;
+
+    public boolean isUp() {
+        return mUp;
+    }
+
+    public void setUp(boolean up) {
+        mUp = up;
+    }
+
+    public int getTitleTextSize() {
+        return mTitleTextSize;
+    }
+
+    public void setTitleTextSize(int titleTextSize) {
+        mTitleTextSize = titleTextSize;
+    }
+
+    public int getTitleTextColor() {
+        return mTitleTextColor;
+    }
+
+    public void setTitleTextColor(int titleTextColor) {
+        mTitleTextColor = titleTextColor;
+    }
+
+    public String getTitleText() {
+        return mTitleText;
+    }
+
+    public void setTitleText(String titleText) {
+        mTitleText = titleText;
+    }
 
     private Rect mBound;
     private Paint mPaint;
@@ -28,6 +63,9 @@ public class PriceView extends View {
 
     private int mBackground;
     private int mCornerSize;
+
+    private Bitmap mBitmap;
+    private Bitmap mBitmap2;
 
     public PriceView(Context context) {
         this(context, null);
@@ -40,6 +78,14 @@ public class PriceView extends View {
     public PriceView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+        this.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTitleText = CustomTitleView.randomText();
+                mUp = Integer.valueOf(mTitleText) > 5000;
+                postInvalidate();
+            }
+        });
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PriceView);
         int n = a.getIndexCount();
         try {
@@ -62,6 +108,9 @@ public class PriceView extends View {
                     case R.styleable.PriceView_mCornerSize:
                         mCornerSize = a.getInteger(attr, 0);
                         break;
+                    case R.styleable.PriceView_mUp:
+                        mUp = a.getBoolean(attr, false);
+                        break;
                 }
             }
         } finally {
@@ -71,8 +120,10 @@ public class PriceView extends View {
         mPaint = new Paint();
         mPaint.setTextSize(mTitleTextSize);
         mBound = new Rect();
+        //mBound为文字大小
         mPaint.getTextBounds(mTitleText, 0, mTitleText.length(), mBound);
-
+        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.img_20x_arrow_up);
+        mBitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.img_20x_arrow_down);
         rec = new RectF(0, 0, getMeasuredWidth(), getMeasuredHeight());
     }
 
@@ -97,7 +148,9 @@ public class PriceView extends View {
             int desired = getPaddingTop() + mBound.height() + getPaddingBottom();
             height = desired <= heightSize ? desired : heightSize;
         }
+        //圆角矩形大小
         rec.set(0, 0, width, height);
+        //整个画布大小，如比rec小则rec显示不全
         setMeasuredDimension(width, height);
     }
 
@@ -107,9 +160,20 @@ public class PriceView extends View {
         mPaint.setColor(mBackground);
         canvas.drawRoundRect(rec, mCornerSize, mCornerSize, mPaint);
 
+//        test
+//        mPaint.setColor(mTitleTextColor);
+//        canvas.drawRect(mBound, mPaint);
+
         mPaint.setColor(mTitleTextColor);
         Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
         int baseline = (getMeasuredHeight() - fontMetrics.bottom + fontMetrics.top) / 2 - fontMetrics.top;
         canvas.drawText(mTitleText, getPaddingLeft(), baseline, mPaint);
+
+        if (mUp) {
+            canvas.drawBitmap(mBitmap, getPaddingLeft() / 2, getMeasuredHeight() - baseline, mPaint);
+        } else {
+            canvas.drawBitmap(mBitmap2, getPaddingLeft() / 2, getMeasuredHeight() - baseline, mPaint);
+        }
+
     }
 }

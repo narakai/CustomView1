@@ -149,7 +149,7 @@ public class CustomTitleView extends View {
         canvas.drawText(mTitleText, getWidth() / 2 - mBound.width() / 2, getHeight() / 2 + mBound.height() / 2, mPaint);
     }
 
-    private String randomText() {
+    public static String randomText() {
         Random random = new Random();
         Set<Integer> set = new HashSet<Integer>();
         while (set.size() < 4) {

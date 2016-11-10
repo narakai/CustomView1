@@ -13,6 +13,7 @@
         <attr name="mTitleTextSize" format="dimension"/>
         <attr name="mTitleTextColor" format="color"/>
         <attr name="mCornerSize" format="integer"/>
+        <attr name="mUp" format="boolean"/>
     </declare-styleable>
 
 </resources>
