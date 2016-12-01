@@ -17,13 +17,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_centerInParent="true"
         app:titleText="3712"
         app:titleTextColor2="#ff0000"
         app:titleTextSize="40sp" />
 
     <com.example.leon.customview1.view.PriceView
-        android:layout_centerHorizontal="true"
+        android:id="@+id/price"
         android:layout_below="@id/c1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +37,12 @@
         app:mCornerSize= "12"
         app:mUp="false"
         />
+
+    <com.example.leon.customview1.view.RoundIndicatorView
+        android:id="@+id/round"
+        android:layout_below="@id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 
 </RelativeLayout>
